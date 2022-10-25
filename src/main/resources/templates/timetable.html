@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Timetable</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" type="text/css" href="css/css/bootstrap.min.css" th:href="@{css/css/bootstrap.min.css}">
+</head>
+<body>
+	<div class="container">
+		<h1>Timetable</h1>
+		<div>sign out
+			<form>
+			</form>
+		</div>
+		<div style="text-align: right; padding: 20px 0">
+			My bookings
+		</div>
+		<div>Search by date</div>
+		<table class="table">
+			<tr>
+				<th>From</th>
+				<th>Destination</th>
+				<th>Date</th>
+				<th>Departure Time</th>
+				<th>Arrival Time</th>
+				<th>Train Type</th>
+				<th></th>
+				<th></th>
+				<th></th>
+			</tr>
+			<tr th:each="trip : ${trips}">
+				<td th:text="${trip.departure}"></td>
+				<td th:text="${trip.destination}"></td>
+				<td th:text="${#temporals.format(trip.date, 'dd.MM.yyyy')}"></td>
+				<td th:text="${trip.departureTime}"></td>
+				<td th:text="${trip.arrivalTime}"></td>
+				<td th:text="${trip.trainType}"></td>
+				<td><a>Delete</a></td>
+				<td><a>Edit</a></td>
+				<td><a>Book this trip</a></td>
+			</tr>
+		</table>
+		<a>Add new trip</a>
+	</div>
+</body>
+</html>

@@ -1,10 +1,16 @@
 package hh.palvelinohjelmointi.travel.domain;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity(name = "users")
 public class User {
@@ -12,10 +18,10 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", nullable = false, updatable = false)
-	private Long id;
+	private Long userId;
 
-	@Column(name = "email", nullable = false, updatable = false)
-	private String email;
+	@Column(name = "username", nullable = false, updatable = false)
+	private String username;
 
 	@Column(name = "role", nullable = false)
 	private String role;
@@ -23,31 +29,35 @@ public class User {
 	@Column(name = "password", nullable = false)
 	private String passwordHash;
 
+	@JsonIgnore
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+	private List<Booking> bookings;
+
 	public User() {
 
 	}
 
-	public User(String email, String role, String passwordHash) {
+	public User(String username, String role, String passwordHash) {
 		super();
-		this.email = email;
+		this.username = username;
 		this.role = role;
 		this.passwordHash = passwordHash;
 	}
 
 	public Long getId() {
-		return id;
+		return userId;
 	}
 
 	public void setId(Long id) {
-		this.id = id;
+		this.userId = id;
 	}
 
 	public String getEmail() {
-		return email;
+		return username;
 	}
 
 	public void setEmail(String email) {
-		this.email = email;
+		this.username = email;
 	}
 
 	public String getRole() {

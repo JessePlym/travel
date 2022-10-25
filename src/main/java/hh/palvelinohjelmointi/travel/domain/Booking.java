@@ -21,6 +21,19 @@ public class Booking {
 	@JoinColumn(name = "tripId")
 	private Trip trip;
 
+	@ManyToOne
+	@JsonIgnoreProperties("bookings")
+	@JoinColumn(name = "userId")
+	private User user;
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	public Booking(Trip trip) {
 		super();
 		this.trip = trip;
