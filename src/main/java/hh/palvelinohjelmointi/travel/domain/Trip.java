@@ -1,18 +1,23 @@
 package hh.palvelinohjelmointi.travel.domain;
 
 import java.time.LocalDate;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Trip {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long tripId;
 
 	private String departure;
 	private String destination;
@@ -20,6 +25,10 @@ public class Trip {
 	private String departureTime;
 	private String arrivalTime;
 	private String trainType;
+
+	@JsonIgnore
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "trip")
+	private List<Booking> bookings;
 
 	public Trip() {
 		super();
@@ -37,11 +46,11 @@ public class Trip {
 	}
 
 	public Long getId() {
-		return id;
+		return tripId;
 	}
 
 	public void setId(Long id) {
-		this.id = id;
+		this.tripId = id;
 	}
 
 	public String getDeparture() {
@@ -92,9 +101,17 @@ public class Trip {
 		this.trainType = trainType;
 	}
 
+	public List<Booking> getBookings() {
+		return bookings;
+	}
+
+	public void setBookings(List<Booking> bookings) {
+		this.bookings = bookings;
+	}
+
 	@Override
 	public String toString() {
-		return "Trip [id=" + id + ", departure=" + departure + ", destination=" + destination + ", date=" + date
+		return "Trip [id=" + tripId + ", departure=" + departure + ", destination=" + destination + ", date=" + date
 				+ ", departureTime=" + departureTime + ", arrivalTime=" + arrivalTime + ", trainType=" + trainType
 				+ "]";
 	}
