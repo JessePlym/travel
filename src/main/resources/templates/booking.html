@@ -10,6 +10,9 @@
 		<tr>
 			<th>Your booking</th>
 		</tr>
+		<tr th:each="booking : ${bookings}">
+			<td th:text="${booking.trip.destination}"></td>
+		</tr>
 	</table>
 	
 </body>
