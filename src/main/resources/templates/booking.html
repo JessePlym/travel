@@ -2,18 +2,40 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <title>Bookings</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" type="text/css" href="css/css/bootstrap.min.css" th:href="@{css/css/bootstrap.min.css}">
 </head>
 <body>
-	<table>
-		<tr>
-			<th>Your booking</th>
-		</tr>
-		<tr th:each="booking : ${bookings}">
-			<td th:text="${booking.trip.destination}"></td>
-		</tr>
-	</table>
-	
+	<div class="container">
+		<h1>Bookings</h1>
+		<div style="text-align: right; padding: 20px 0">
+			<a href="/timetable">Return</a>
+		</div>
+		<table class="table">
+			<tr>
+				<th>User</th>
+				<th>Date</th>
+				<th>To</th>
+				<th>From</th>
+				<th>Departure time</th>
+				<th>Arrival time</th>
+				<th>Train type</th>
+				<th></th>
+				<th></th>
+			</tr>
+			<tr th:each="booking : ${bookings}">
+				<td>bookers email</td>
+				<td th:text="${#dates.format(booking.trip.date, 'dd.MM.yyyy')}"></td>
+				<td th:text="${booking.trip.destination}"></td>
+				<td th:text="${booking.trip.departure}"></td>
+				<td th:text="${booking.trip.departureTime}"></td>
+				<td th:text="${booking.trip.arrivalTime}"></td>
+				<td th:text="${booking.trip.trainType.name}"></td>
+				<td><a>Cancel trip</a></td>
+				<td><a>Edit your trip</a></td>
+			</tr>
+		</table>
+	</div>
 </body>
 </html>

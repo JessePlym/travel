@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Travel booking</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<style>
+	form {
+		display: block;
+	}
+	input {
+		width: 200px;
+}
+</style>
+</head>
+<body>
+	<h1>Edit trip</h1>
+	<form action="#" th:action="@{/savetrip}" method="post" th:object="${trip}">
+		<input type="hidden" th:field="*{tripId}"/>
+		<div><label>From: </label><input type="text" th:field="*{departure}"/></div>
+		<div><label>Destination: </label><input type="text" th:field="*{destination}"/></div>
+		<div><label>Date: </label><input type="date" th:field="*{date}"/></div>
+		<div><label>Departure time: </label><input type="text" th:field="*{departureTime}"/></div>
+		<div><label>Arrival time: </label><input type="text" th:field="*{arrivalTime}"/></div>
+		<div><label>Train type: </label>
+			<select th:field="*{trainType}">
+				<option th:each="type : ${traintypes}" th:value="${type.typeId}" th:text="${type.name}"></option>
+			</select>
+		</div>
+		<div><input type="submit" value="Edit"/></div>
+	</form>
+</body>
+</html>

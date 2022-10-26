@@ -1,6 +1,6 @@
 package hh.palvelinohjelmointi.travel;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +11,8 @@ import org.springframework.context.annotation.Bean;
 
 import hh.palvelinohjelmointi.travel.domain.Booking;
 import hh.palvelinohjelmointi.travel.domain.BookingRepository;
+import hh.palvelinohjelmointi.travel.domain.TrainType;
+import hh.palvelinohjelmointi.travel.domain.TrainTypeRepository;
 import hh.palvelinohjelmointi.travel.domain.Trip;
 import hh.palvelinohjelmointi.travel.domain.TripRepository;
 
@@ -24,11 +26,18 @@ public class TravelApplication {
 	}
 
 	@Bean
-	public CommandLineRunner travelDemo(BookingRepository bookingRepo, TripRepository tripRepo) {
+	public CommandLineRunner travelDemo(BookingRepository bookingRepo, TripRepository tripRepo,
+			TrainTypeRepository typeRepo) {
 		return (args) -> {
-			// creating test trips and adding to repos
-			Trip trip1 = new Trip("Helsinki", "Tampere", LocalDate.of(2022, 10, 25), "12:00", "13:30", "ExpressTrain");
-			Trip trip2 = new Trip("Helsinki", "Turku", LocalDate.of(2022, 10, 25), "12:05", "13:40", "InterCity");
+			// creating few test traintypes
+			TrainType type1 = new TrainType("ExpressTrain");
+			TrainType type2 = new TrainType("BulletTrain");
+			typeRepo.save(type1);
+			typeRepo.save(type2);
+
+			// creating test trips with traintypes and adding to repos
+			Trip trip1 = new Trip("Helsinki", "Tampere", new Date(), "12:00", "13:30", type1);
+			Trip trip2 = new Trip("Helsinki", "Turku", new Date(), "12:05", "13:40", type2);
 
 			tripRepo.save(trip1);
 			tripRepo.save(trip2);

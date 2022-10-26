@@ -14,7 +14,7 @@
 			</form>
 		</div>
 		<div style="text-align: right; padding: 20px 0">
-			My bookings
+			<a href="/allbookings">My bookings</a>
 		</div>
 		<div>Search by date</div>
 		<table class="table">
@@ -32,16 +32,17 @@
 			<tr th:each="trip : ${trips}">
 				<td th:text="${trip.departure}"></td>
 				<td th:text="${trip.destination}"></td>
-				<td th:text="${#temporals.format(trip.date, 'dd.MM.yyyy')}"></td>
+				<td th:text="${#dates.format(trip.date, 'dd.MM.yyyy')}"></td>
 				<td th:text="${trip.departureTime}"></td>
 				<td th:text="${trip.arrivalTime}"></td>
-				<td th:text="${trip.trainType}"></td>
-				<td><a>Delete</a></td>
-				<td><a>Edit</a></td>
-				<td><a>Book this trip</a></td>
+				<td th:text="${trip.trainType.name}"></td>
+				<td><a class="btn btn-danger" th:href="@{/deletetrip/{id}(id=${trip.tripId})}">Delete</a></td>
+				<td><a class="btn btn-success" th:href="@{/edittrip/{id}(id=${trip.tripId})}">Edit</a></td>
+				<td><a class="btn btn-success" th:href="@{/booktrip/{id}(id=${trip.tripId})}">Book this trip</a></td>
 			</tr>
 		</table>
-		<a>Add new trip</a>
+		<a class="btn btn-success" href="/addtrip">Add new trip  </a>
+		<a class="btn btn-success" href="/addtype">Add new train type</a>
 	</div>
 </body>
 </html>

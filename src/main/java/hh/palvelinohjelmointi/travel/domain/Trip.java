@@ -1,6 +1,6 @@
 package hh.palvelinohjelmointi.travel.domain;
 
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -8,9 +8,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Trip {
@@ -21,10 +26,16 @@ public class Trip {
 
 	private String departure;
 	private String destination;
-	private LocalDate date;
+
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date date;
 	private String departureTime;
 	private String arrivalTime;
-	private String trainType;
+
+	@ManyToOne
+	@JsonIgnoreProperties("trips")
+	@JoinColumn(name = "typeId")
+	private TrainType trainType;
 
 	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "trip")
@@ -34,8 +45,8 @@ public class Trip {
 		super();
 	}
 
-	public Trip(String departure, String destination, LocalDate date, String departureTime, String arrivalTime,
-			String trainType) {
+	public Trip(String departure, String destination, Date date, String departureTime, String arrivalTime,
+			TrainType trainType) {
 		super();
 		this.departure = departure;
 		this.destination = destination;
@@ -45,12 +56,12 @@ public class Trip {
 		this.trainType = trainType;
 	}
 
-	public Long getId() {
+	public Long getTripId() {
 		return tripId;
 	}
 
-	public void setId(Long id) {
-		this.tripId = id;
+	public void setTripId(Long tripId) {
+		this.tripId = tripId;
 	}
 
 	public String getDeparture() {
@@ -69,11 +80,11 @@ public class Trip {
 		this.destination = destination;
 	}
 
-	public LocalDate getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(LocalDate date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 
@@ -93,11 +104,11 @@ public class Trip {
 		this.arrivalTime = arrivalTime;
 	}
 
-	public String getTrainType() {
+	public TrainType getTrainType() {
 		return trainType;
 	}
 
-	public void setTrainType(String trainType) {
+	public void setTrainType(TrainType trainType) {
 		this.trainType = trainType;
 	}
 
@@ -112,8 +123,8 @@ public class Trip {
 	@Override
 	public String toString() {
 		return "Trip [id=" + tripId + ", departure=" + departure + ", destination=" + destination + ", date=" + date
-				+ ", departureTime=" + departureTime + ", arrivalTime=" + arrivalTime + ", trainType=" + trainType
-				+ "]";
+				+ ", departureTime=" + departureTime + ", arrivalTime=" + arrivalTime + ", trainType="
+				+ this.getTrainType().getName() + "]";
 	}
 
 }
