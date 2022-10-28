@@ -32,9 +32,14 @@ public class TravelApplication {
 			TrainTypeRepository typeRepo, UserRepository userRepo) {
 		return (args) -> {
 			// creating test users
-			User user1 = new User("User", "USER", "$2a$10$VRmMn/mqKQE7SZhmk./o5O7LLjtVdHhzNS9y9LrGOGVKF4HOLAcJ6");
-			User admin = new User("Admin", "Admin", "$2a$10$f/eyQ2c01Ke.H2N38KtLV.vyuu1UWeiGmB3SByfmfa8CTS8v4RSG.");
+			User user1 = new User("user1@mail.com", "USER",
+					"$2a$10$VRmMn/mqKQE7SZhmk./o5O7LLjtVdHhzNS9y9LrGOGVKF4HOLAcJ6");
+			User user2 = new User("user2@mail.com", "USER",
+					"$2a$10$VRmMn/mqKQE7SZhmk./o5O7LLjtVdHhzNS9y9LrGOGVKF4HOLAcJ6");
+			User admin = new User("admin@mail.com", "Admin",
+					"$2a$10$f/eyQ2c01Ke.H2N38KtLV.vyuu1UWeiGmB3SByfmfa8CTS8v4RSG.");
 			userRepo.save(user1);
+			userRepo.save(user2);
 			userRepo.save(admin);
 
 			// logging users to console
@@ -61,8 +66,8 @@ public class TravelApplication {
 			}
 
 			// creating test bookings that use previously made trips
-			Booking booking1 = new Booking(trip1, admin);
-			Booking booking2 = new Booking(trip2, admin);
+			Booking booking1 = new Booking(trip1, user1);
+			Booking booking2 = new Booking(trip2, user2);
 			bookingRepo.save(booking1);
 			bookingRepo.save(booking2);
 

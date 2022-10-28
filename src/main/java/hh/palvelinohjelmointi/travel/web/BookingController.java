@@ -54,25 +54,25 @@ public class BookingController {
 	 * bookings list
 	 */
 	@GetMapping("/booktrip/{id}")
-	public String bookThisTrip(@PathVariable(name = "id") Long id, Model model) {
-		model.addAttribute("booking", new Booking());
+	public String bookThisTrip(@PathVariable(name = "id") Long id, Model model, Principal principal) {
 		model.addAttribute("trip", tripRepo.findById(id));
 		return "booktrip";
 	}
 
-	// adds booked trip to bookings
+	// adds booked trip and current user to bookings
 	@PostMapping("/book")
-	public String saveBooking(Booking booking, Trip trip) {
+	public String saveBooking(Booking booking, Trip trip, Principal principal) {
 		booking.setTrip(trip); // this sets the selected trip to new booking
+		booking.setUser(userRepo.findByUsername(principal.getName())); // this sets the current user to new booking
 		bookingRepo.save(booking);
-		return "redirect:/allbookings";
+		return "redirect:/ownbookings";
 	}
 
 	// this method deletes booking from repository
 	@GetMapping("/deletebooking/{id}")
 	public String deleteBooking(@PathVariable(name = "id") Long id) {
 		bookingRepo.deleteById(id);
-		return "redirect:/allbookings";
+		return "redirect:/ownbookings";
 	}
 
 	@GetMapping("/editbooking/{id}")

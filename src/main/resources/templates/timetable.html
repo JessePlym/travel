@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 	<title>Timetable</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -9,12 +9,15 @@
 <body>
 	<div class="container">
 		<h1>Timetable</h1>
-		<div>sign out
-			<form>
+		<div>
+			<form th:action="@{/logout}" method="post">
+				<input type="submit" value="Sign Out" class="btn btn-sm btn-danger"/>
 			</form>
 		</div>
+		<div th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</div>
 		<div style="text-align: right; padding: 20px 0">
-			<a href="/allbookings">My bookings</a>
+			<a href="/ownbookings">My bookings</a>
+			<a href="/allbookings">All bookings</a>
 		</div>
 		<div>Search by date</div>
 		<table class="table">
