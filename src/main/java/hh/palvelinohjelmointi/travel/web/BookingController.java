@@ -3,6 +3,7 @@ package hh.palvelinohjelmointi.travel.web;
 import java.security.Principal;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,6 +45,7 @@ public class BookingController {
 
 	// shows all bookings for testing
 	@GetMapping("/allbookings")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public String showAllBookings(Model model) {
 		model.addAttribute("bookings", bookingRepo.findAll());
 		return "booking";

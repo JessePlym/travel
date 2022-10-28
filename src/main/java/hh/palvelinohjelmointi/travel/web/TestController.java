@@ -9,7 +9,7 @@ public class TestController {
 	// returns index page
 	@GetMapping("/")
 	public String showIndexPage() {
-		return "index";
+		return "redirect:/timetable";
 	}
 
 }

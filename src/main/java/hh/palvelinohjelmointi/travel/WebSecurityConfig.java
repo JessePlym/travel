@@ -33,7 +33,7 @@ public class WebSecurityConfig {
 		http
 		.authorizeRequests()
 			.antMatchers("/css/**").permitAll()
-			.antMatchers("/signup", "/saveuser").permitAll()
+			.antMatchers("/signup", "/saveuser", "/timetable", "/").permitAll()
 			.antMatchers("/h2-console/**").permitAll()
 			.anyRequest().authenticated()
 			.and()

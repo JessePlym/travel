@@ -1,6 +1,7 @@
 package hh.palvelinohjelmointi.travel.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +20,7 @@ public class TrainTypeController {
 	// this method directs to traintype adding page
 	// only admin can add new types
 	@GetMapping("/addtype")
-	// @PreAuthorize("hasAuthority('ADMIN')")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public String addTrainType(Model model) {
 		model.addAttribute("traintype", new TrainType());
 		return "addtype";
@@ -27,7 +28,7 @@ public class TrainTypeController {
 
 	// saves new train type to repository
 	@PostMapping("/savetype")
-	// @PreAuthorize("hasAuthority('ADMIN')")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public String saveType(TrainType traintype) {
 		trainTypeRepository.save(traintype);
 		return "redirect:/timetable";
@@ -35,7 +36,7 @@ public class TrainTypeController {
 
 	// this method deletes selected traintype by id
 	@GetMapping("/deletetype/{id}")
-	// @PreAuthorize("hasAuthority('ADMIN')")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public String deleteType(@PathVariable(name = "id") Long id) {
 		trainTypeRepository.deleteById(id);
 		return "redirect:/timetable";

@@ -36,7 +36,7 @@ public class TravelApplication {
 					"$2a$10$VRmMn/mqKQE7SZhmk./o5O7LLjtVdHhzNS9y9LrGOGVKF4HOLAcJ6");
 			User user2 = new User("user2@mail.com", "USER",
 					"$2a$10$VRmMn/mqKQE7SZhmk./o5O7LLjtVdHhzNS9y9LrGOGVKF4HOLAcJ6");
-			User admin = new User("admin@mail.com", "Admin",
+			User admin = new User("admin@mail.com", "ADMIN",
 					"$2a$10$f/eyQ2c01Ke.H2N38KtLV.vyuu1UWeiGmB3SByfmfa8CTS8v4RSG.");
 			userRepo.save(user1);
 			userRepo.save(user2);

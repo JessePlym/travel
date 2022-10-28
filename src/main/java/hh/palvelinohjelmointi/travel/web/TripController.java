@@ -1,6 +1,7 @@
 package hh.palvelinohjelmointi.travel.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,6 +30,7 @@ public class TripController {
 
 	// This method directs to addtrip site. Only admin can add new trips
 	@GetMapping("/addtrip")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public String addNewTrip(Model model) {
 		model.addAttribute("trip", new Trip());
 		model.addAttribute("traintypes", typeRepo.findAll()); // train types will in dropdown list
@@ -37,6 +39,7 @@ public class TripController {
 
 	// this method saves new trip to repository
 	@PostMapping("/savetrip")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public String saveTrip(Trip trip) {
 		tripRepo.save(trip);
 		return "redirect:/timetable";
@@ -44,6 +47,7 @@ public class TripController {
 
 	// delete trip from repository using selected id
 	@GetMapping("/deletetrip/{id}")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public String deleteTrip(@PathVariable(name = "id") Long id) {
 		tripRepo.deleteById(id);
 		return "redirect:/timetable";
@@ -51,6 +55,7 @@ public class TripController {
 
 	// directs selected trip by id to editing page
 	@GetMapping("/edittrip/{id}")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public String editTrip(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("trip", tripRepo.findById(id));
 		model.addAttribute("traintypes", typeRepo.findAll());
