@@ -68,4 +68,17 @@ public class BookingController {
 		return "redirect:/allbookings";
 	}
 
+	// this method deletes booking from repository
+	@GetMapping("/deletebooking/{id}")
+	public String deleteBooking(@PathVariable(name = "id") Long id) {
+		bookingRepo.deleteById(id);
+		return "redirect:/allbookings";
+	}
+
+	@GetMapping("/editbooking/{id}")
+	public String editBooking(@PathVariable(name = "id") Long id, Model model) {
+		// TODO
+		return "";
+	}
+
 }

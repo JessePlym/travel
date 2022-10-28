@@ -52,12 +52,12 @@ public class User {
 		this.userId = id;
 	}
 
-	public String getEmail() {
+	public String getUsername() {
 		return username;
 	}
 
-	public void setEmail(String email) {
-		this.username = email;
+	public void setEmail(String username) {
+		this.username = username;
 	}
 
 	public String getRole() {
@@ -74,6 +74,12 @@ public class User {
 
 	public void setPasswordHash(String passwordHash) {
 		this.passwordHash = passwordHash;
+	}
+
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", username=" + username + ", role=" + role + ", passwordHash=" + passwordHash
+				+ "]";
 	}
 
 }

@@ -38,7 +38,7 @@
 				<td th:text="${trip.trainType.name}"></td>
 				<td><a class="btn btn-danger" th:href="@{/deletetrip/{id}(id=${trip.tripId})}">Delete</a></td>
 				<td><a class="btn btn-success" th:href="@{/edittrip/{id}(id=${trip.tripId})}">Edit</a></td>
-				<td><a class="btn btn-success" th:href="@{/booktrip/{id}(id=${trip.tripId})}">Book this trip</a></td>
+				<td><a class="btn btn-primary" th:href="@{/booktrip/{id}(id=${trip.tripId})}">Book this trip</a></td>
 			</tr>
 		</table>
 		<a class="btn btn-success" href="/addtrip">Add new trip  </a>

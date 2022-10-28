@@ -26,22 +26,24 @@ public class Booking {
 	@JoinColumn(name = "userId")
 	private User user;
 
+	public Booking() {
+		super();
+		this.trip = null;
+		this.user = null;
+	}
+
+	public Booking(Trip trip, User user) {
+		super();
+		this.trip = trip;
+		this.user = user;
+	}
+
 	public User getUser() {
 		return user;
 	}
 
 	public void setUser(User user) {
 		this.user = user;
-	}
-
-	public Booking(Trip trip) {
-		super();
-		this.trip = trip;
-	}
-
-	public Booking() {
-		super();
-		this.trip = null;
 	}
 
 	public Trip getTrip() {
@@ -62,7 +64,8 @@ public class Booking {
 
 	@Override
 	public String toString() {
-		return "Booking [bookingNumber=" + bookingNumber + ", trip=" + this.getTrip().getDestination() + "]";
+		return "Booking [bookingNumber=" + bookingNumber + ", trip=" + this.trip.getDestination() + ", user="
+				+ this.user.getUsername() + "]";
 	}
 
 }

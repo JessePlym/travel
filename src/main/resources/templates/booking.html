@@ -32,8 +32,8 @@
 				<td th:text="${booking.trip.departureTime}"></td>
 				<td th:text="${booking.trip.arrivalTime}"></td>
 				<td th:text="${booking.trip.trainType.name}"></td>
-				<td><a>Cancel trip</a></td>
-				<td><a>Edit your trip</a></td>
+				<td><a class="btn btn-danger" th:href="@{/deletebooking/{id}(id=${booking.bookingNumber})}" onClick="return confirm('Do you want to cancel your trip?')">Cancel trip</a></td>
+				<td><a class="btn btn-success" th:href="@{/editbooking/{id}(id=${booking.bookingNumber})}">Edit your trip</a></td>
 			</tr>
 		</table>
 	</div>

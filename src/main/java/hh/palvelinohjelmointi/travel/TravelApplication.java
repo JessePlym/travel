@@ -15,6 +15,8 @@ import hh.palvelinohjelmointi.travel.domain.TrainType;
 import hh.palvelinohjelmointi.travel.domain.TrainTypeRepository;
 import hh.palvelinohjelmointi.travel.domain.Trip;
 import hh.palvelinohjelmointi.travel.domain.TripRepository;
+import hh.palvelinohjelmointi.travel.domain.User;
+import hh.palvelinohjelmointi.travel.domain.UserRepository;
 
 @SpringBootApplication
 public class TravelApplication {
@@ -27,8 +29,19 @@ public class TravelApplication {
 
 	@Bean
 	public CommandLineRunner travelDemo(BookingRepository bookingRepo, TripRepository tripRepo,
-			TrainTypeRepository typeRepo) {
+			TrainTypeRepository typeRepo, UserRepository userRepo) {
 		return (args) -> {
+			// creating test users
+			User user1 = new User("User", "USER", "$2a$10$VRmMn/mqKQE7SZhmk./o5O7LLjtVdHhzNS9y9LrGOGVKF4HOLAcJ6");
+			User admin = new User("Admin", "Admin", "$2a$10$f/eyQ2c01Ke.H2N38KtLV.vyuu1UWeiGmB3SByfmfa8CTS8v4RSG.");
+			userRepo.save(user1);
+			userRepo.save(admin);
+
+			// logging users to console
+			for (User user : userRepo.findAll()) {
+				log.info(user.toString());
+			}
+
 			// creating few test traintypes
 			TrainType type1 = new TrainType("ExpressTrain");
 			TrainType type2 = new TrainType("BulletTrain");
@@ -42,13 +55,14 @@ public class TravelApplication {
 			tripRepo.save(trip1);
 			tripRepo.save(trip2);
 
+			// logging trips to console
 			for (Trip trip : tripRepo.findAll()) {
 				log.info(trip.toString());
 			}
 
 			// creating test bookings that use previously made trips
-			Booking booking1 = new Booking(trip1);
-			Booking booking2 = new Booking(trip2);
+			Booking booking1 = new Booking(trip1, admin);
+			Booking booking2 = new Booking(trip2, admin);
 			bookingRepo.save(booking1);
 			bookingRepo.save(booking2);
 
