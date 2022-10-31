@@ -9,10 +9,14 @@
 <body>
 	<div class="container">
 		<h1>Timetable</h1>
-		<div>
-			<form sec:authorize="isAuthenticated" th:action="@{/logout}" method="post">
-				<input type="submit" value="Sign Out" class="btn btn-sm btn-danger"/>
+		<div th:switch="${#authentication}? ${#authorization.expression('isAuthenticated()')} : ${false}">
+			<form th:case="${true}"th:action="@{/logout}" method="post">
+				<input type="submit" value="Log Out" class="btn btn-sm btn-danger"/>
 			</form>
+			<form th:case="${false}" th:action="@{/login}" method="get">
+				<input type="submit" value="Log in" class="btn btn-sm btn-success"/>
+				<span><a class="btn btn-sm btn-success">Sign up</a></span>
+			</form>	
 		</div>
 		<div th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</div>
 		<div style="text-align: right; padding: 20px 0">

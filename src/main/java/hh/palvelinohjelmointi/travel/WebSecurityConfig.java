@@ -46,6 +46,7 @@ public class WebSecurityConfig {
 			.permitAll()
 			.and()
 		.logout()
+			.logoutSuccessUrl("/timetable")
 			.permitAll()
 			.and()
 		.httpBasic();
