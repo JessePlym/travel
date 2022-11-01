@@ -26,7 +26,7 @@
 			</tr>
 			<tr th:each="booking : ${bookings}">
 				<td th:text="${booking.user.username}">bookers email</td>
-				<td th:text="${#dates.format(booking.trip.date, 'dd.MM.yyyy')}"></td>
+				<td th:text="${#dates.format(booking.date, 'dd.MM.yyyy')}"></td>
 				<td th:text="${booking.trip.departure}"></td>
 				<td th:text="${booking.trip.destination}"></td>
 				<td th:text="${booking.trip.departureTime}"></td>

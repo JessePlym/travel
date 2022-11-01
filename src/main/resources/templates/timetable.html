@@ -28,7 +28,6 @@
 			<tr>
 				<th>From</th>
 				<th>Destination</th>
-				<th>Date</th>
 				<th>Departure Time</th>
 				<th>Arrival Time</th>
 				<th>Train Type</th>
@@ -39,7 +38,6 @@
 			<tr th:each="trip : ${trips}">
 				<td th:text="${trip.departure}"></td>
 				<td th:text="${trip.destination}"></td>
-				<td th:text="${#dates.format(trip.date, 'dd.MM.yyyy')}"></td>
 				<td th:text="${trip.departureTime}"></td>
 				<td th:text="${trip.arrivalTime}"></td>
 				<td th:text="${trip.trainType.name}"></td>
