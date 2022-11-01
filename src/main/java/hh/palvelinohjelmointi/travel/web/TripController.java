@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import hh.palvelinohjelmointi.travel.domain.Booking;
 import hh.palvelinohjelmointi.travel.domain.TrainTypeRepository;
 import hh.palvelinohjelmointi.travel.domain.Trip;
 import hh.palvelinohjelmointi.travel.domain.TripRepository;
@@ -25,6 +26,7 @@ public class TripController {
 	@GetMapping("/timetable")
 	public String showAlltrips(Model model) {
 		model.addAttribute("trips", tripRepo.findAll());
+		model.addAttribute("booking", new Booking()); // for date
 		return "timetable";
 	}
 

@@ -15,7 +15,7 @@
 			</form>
 			<form th:case="${false}" th:action="@{/login}" method="get">
 				<input type="submit" value="Log in" class="btn btn-sm btn-success"/>
-				<span><a class="btn btn-sm btn-success">Sign up</a></span>
+				<span><a class="btn btn-sm btn-success" th:href="@{/signup}">Sign up</a></span>
 			</form>	
 		</div>
 		<div th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</div>
@@ -23,7 +23,8 @@
 			<a href="/ownbookings">My bookings</a><br>
 			<a sec:authorize="hasAuthority('ADMIN')" href="/allbookings">All bookings</a>
 		</div>
-		<div>Search by date</div>
+			<h5 th:text="${#dates.format(#dates.createNow(), 'dd.MM.yyyy')}">date</h5>
+		
 		<table class="table">
 			<tr>
 				<th>From</th>

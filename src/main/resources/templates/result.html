@@ -9,10 +9,8 @@
 	<h1>Travel booking</h1>
 	<p>Connection works</p>
 	
-	<form action="#" th:action="@{/testsave}" method="post" th:object="${testbooking}">
-			<div><label>Select date: </label><input placeholder="dd.mm.yyyy" type="date" th:field="*{date}" /></div>
-			<input type="submit" value="save"/>
-	</form>
+	<p th:text="${#dates.format(booking.date, 'dd/MM/yyyy')}"></p>
+	
 	
 </body>
 </html>

@@ -1,31 +1,35 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Travel booking</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<style>
-	form {
-		display: block;
-	}
-	input {
-		width: 200px;
-}
-</style>
+	<title>Travel booking</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link type="text/css" rel="stylesheet" href="css/css/bootstrap.min.css" th:href="@{css/css/bootstrap.min.css}"/>
+	<style>
+		.container {
+			text-align: center;
+			justify-content: center;
+			margin: auto;
+		}
+	</style>
 </head>
 <body>
-	<h1>Add new trip</h1>
-	<form action="#" th:action="@{savetrip}" method="post" th:object="${trip}">
-		<div><label>From: </label><input type="text" th:field="*{departure}"/></div>
-		<div><label>Destination: </label><input type="text" th:field="*{destination}"/></div>
-		<div><label>Departure time: </label><input type="text" th:field="*{departureTime}"/></div>
-		<div><label>Arrival time: </label><input type="text" th:field="*{arrivalTime}"/></div>
-		<div><label>Train type: </label>
-			<select th:field="*{trainType}">
-				<option th:each="type : ${traintypes}" th:value="${type.typeId}" th:text="${type.name}"></option>
-			</select>
+	<div class="container">
+		<h1>Add new trip</h1>
+		<div>
+			<form action="#" th:action="@{savetrip}" method="post" th:object="${trip}">
+				<div><label>From: </label><input  type="text" th:field="*{departure}" required/></div>
+				<div><label>Destination: </label><input type="text" th:field="*{destination}" required/></div>
+				<div><label>Departure time: </label><input type="text" th:field="*{departureTime}" required/></div>
+				<div><label>Arrival time: </label><input  type="text" th:field="*{arrivalTime}" required/></div>
+				<div><label>Train type: </label>
+					<select th:field="*{trainType}">
+						<option th:each="type : ${traintypes}" th:value="${type.typeId}" th:text="${type.name}"></option>
+					</select>
+				</div>
+				<div><input type="submit" value="Add"/></div>
+			</form>
 		</div>
-		<div><input type="submit" value="Add"/></div>
-	</form>
+	</div>
 </body>
 </html>

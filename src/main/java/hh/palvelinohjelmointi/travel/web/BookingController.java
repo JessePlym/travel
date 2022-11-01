@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -18,6 +20,7 @@ import hh.palvelinohjelmointi.travel.domain.TripRepository;
 import hh.palvelinohjelmointi.travel.domain.User;
 import hh.palvelinohjelmointi.travel.domain.UserRepository;
 
+@CrossOrigin
 @Controller
 public class BookingController {
 
@@ -56,14 +59,22 @@ public class BookingController {
 	 * bookings list
 	 */
 	@GetMapping("/booktrip/{id}")
-	public String bookThisTrip(@PathVariable(name = "id") Long id, Model model, Principal principal) {
+	public String bookThisTrip(@PathVariable(name = "id") Long id, Model model) {
 		model.addAttribute("trip", tripRepo.findById(id));
+		model.addAttribute("booking", new Booking());
+		// model.addAttribute("booking", new Booking());
 		return "booktrip";
 	}
 
+	/*
+	 * @PostMapping("/setdate") public String setDateForBooking(Model
+	 * model, @ModelAttribute("booking") Booking booking) {
+	 * model.addAttribute("booking", booking); return "redirect:/timetable"; }
+	 */
+
 	// adds booked trip and current user to bookings
 	@PostMapping("/book")
-	public String saveBooking(Booking booking, Trip trip, Principal principal) {
+	public String saveBooking(Trip trip, @ModelAttribute("booking") Booking booking, Principal principal) {
 		booking.setTrip(trip); // this sets the selected trip to new booking
 		booking.setUser(userRepo.findByUsername(principal.getName())); // this sets the current user to new booking
 		bookingRepo.save(booking);

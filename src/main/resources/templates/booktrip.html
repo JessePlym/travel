@@ -1,29 +1,36 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Travel booking</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet" type="text/css" href="css/css/bootstrap.min.css" th:href="@{css/css/bootstrap.min.css}">
+	<title>Travel booking</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link type="text/css" rel="stylesheet" href="css/css/bootstrap.min.css" th:href="@{css/css/bootstrap.min.css}"/>
+	<style>
+		.container {
+			text-align: center;
+			justify-content: center;
+			margin: auto;
+		}
+	</style>
 </head>
 <body>
 	<div class="container">
 		<h1>Travel booking</h1>
 		<p>Do you want to book this trip?</p>
-		<table>
+		
+		<form action="#" th:action="@{/book}" method="post" th:object="${booking}">
+			<div><label>Select date: </label><input placeholder="dd.mm.yyyy" type="date" th:field="*{date}" /></div>
+			<input type="hidden" th:field="*{trip.tripId}"/>
+			<div><label>From: </label><input class="form-control" type="text" th:field="*{trip.departure}" readonly/></div>
+			<div><label>Destination: </label><input class="form-control" type="text" th:field="*{trip.destination}" readonly/></div>
+			<div><label>Departure time: </label><input class="form-control" type="text" th:field="*{trip.departureTime}" readonly/></div>
+			<div><label>Arrival time: </label><input class="form-control" type="text" th:field="*{trip.arrivalTime}" readonly/></div>
+			<div><label>Train type: </label><input class="form-control" type="text" th:field="*{trip.trainType.name}" readonly/></div>
 			
-		</table>
-		<form action="#" th:action="@{/book}" method="post" th:object="${trip}">
-			<input type="hidden" th:field="*{tripId}"/>
-			<div><label>From: </label><input type="text" th:field="*{departure}" readonly/></div>
-			<div><label>Destination: </label><input type="text" th:field="*{destination}" readonly/></div>
-			<div><label>Departure time: </label><input type="text" th:field="*{departureTime}" readonly/></div>
-			<div><label>Arrival time: </label><input type="text" th:field="*{arrivalTime}" readonly/></div>
-			<div><label>Train type: </label><input type="text" th:field="*{trainType.name}" readonly/>
-		</div>
-			<input type="submit" value="Pay here"/>
-			<a href="/timetable"> Back</a>
+			<input type="submit" class="btn btn-success" value="Pay here"/>
 		</form>
+		
+			<a href="/timetable"> Back</a>
 	</div>
 </body>
 </html>
