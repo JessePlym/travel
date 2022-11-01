@@ -1,6 +1,5 @@
 package hh.palvelinohjelmointi.travel.domain;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -11,8 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -26,9 +23,6 @@ public class Trip {
 
 	private String departure;
 	private String destination;
-
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date date;
 	private String departureTime;
 	private String arrivalTime;
 
@@ -45,12 +39,10 @@ public class Trip {
 		super();
 	}
 
-	public Trip(String departure, String destination, Date date, String departureTime, String arrivalTime,
-			TrainType trainType) {
+	public Trip(String departure, String destination, String departureTime, String arrivalTime, TrainType trainType) {
 		super();
 		this.departure = departure;
 		this.destination = destination;
-		this.date = date;
 		this.departureTime = departureTime;
 		this.arrivalTime = arrivalTime;
 		this.trainType = trainType;
@@ -78,14 +70,6 @@ public class Trip {
 
 	public void setDestination(String destination) {
 		this.destination = destination;
-	}
-
-	public Date getDate() {
-		return date;
-	}
-
-	public void setDate(Date date) {
-		this.date = date;
 	}
 
 	public String getDepartureTime() {
@@ -122,9 +106,8 @@ public class Trip {
 
 	@Override
 	public String toString() {
-		return "Trip [id=" + tripId + ", departure=" + departure + ", destination=" + destination + ", date=" + date
-				+ ", departureTime=" + departureTime + ", arrivalTime=" + arrivalTime + ", trainType="
-				+ this.getTrainType().getName() + "]";
+		return "Trip [id=" + tripId + ", departure=" + departure + ", destination=" + destination + ", departureTime="
+				+ departureTime + ", arrivalTime=" + arrivalTime + ", trainType=" + this.getTrainType().getName() + "]";
 	}
 
 }

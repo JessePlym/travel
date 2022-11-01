@@ -54,8 +54,8 @@ public class TravelApplication {
 			typeRepo.save(type2);
 
 			// creating test trips with traintypes and adding to repos
-			Trip trip1 = new Trip("Helsinki", "Tampere", new Date(), "12:00", "13:30", type1);
-			Trip trip2 = new Trip("Helsinki", "Turku", new Date(), "12:05", "13:40", type2);
+			Trip trip1 = new Trip("Helsinki", "Tampere", "12:00", "13:30", type1);
+			Trip trip2 = new Trip("Helsinki", "Turku", "12:05", "13:40", type2);
 
 			tripRepo.save(trip1);
 			tripRepo.save(trip2);
@@ -66,8 +66,8 @@ public class TravelApplication {
 			}
 
 			// creating test bookings that use previously made trips
-			Booking booking1 = new Booking(trip1, user1);
-			Booking booking2 = new Booking(trip2, user2);
+			Booking booking1 = new Booking(trip1, user1, new Date());
+			Booking booking2 = new Booking(trip2, user2, new Date());
 			bookingRepo.save(booking1);
 			bookingRepo.save(booking2);
 
