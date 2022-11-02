@@ -81,10 +81,17 @@ public class BookingController {
 		return "redirect:/ownbookings";
 	}
 
+	// this method gets users booking by id to web page
 	@GetMapping("/editbooking/{id}")
 	public String editBooking(@PathVariable(name = "id") Long id, Model model) {
-		// TODO
-		return "";
+		model.addAttribute("booking", bookingRepo.findById(id));
+		return "editbooking";
+	}
+
+	@PostMapping("/edit")
+	public String saveEditedBooking(Booking booking) {
+		bookingRepo.save(booking);
+		return "redirect:/ownbookings";
 	}
 
 }
