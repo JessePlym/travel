@@ -19,7 +19,7 @@
 		<p>Do you want to book this trip?</p>
 		
 		<form action="#" th:action="@{/book}" method="post" th:object="${booking}">	
-			<div><label>Select date for your trip: </label><input placeholder="dd.mm.yyyy" type="date" th:field="*{date}" required/></div>
+			<div><label>Select date for your trip: </label><input placeholder="dd.mm.yyyy" type="date" th:field="*{date}" th:attr="min=${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}" required/></div>
 			<div><input type="hidden" th:field="${trip.tripId}"/></div>
 			<div><label>From: </label><input class="form-control" type="text" th:field="${trip.departure}" readonly/></div>
 			<div><label>Destination: </label><input class="form-control" type="text" th:field="${trip.destination}" readonly/></div>

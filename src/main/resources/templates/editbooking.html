@@ -18,6 +18,8 @@
 		<h1>Edit your booking date</h1>
 		<form action="#" th:action="@{/edit}" method="post" th:object="${booking}">
 			<input type="hidden" th:field="*{bookingNumber}"/>
+			<input type="hidden" th:field="*{trip}"/>
+			<input type="hidden" th:field="*{user}"/>
 			<div><input type="date" th:field="*{date}"/></div>
 		
 			<div><input type="submit" class="btn btn-primary" value="Edit"/></div>
