@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -58,23 +57,17 @@ public class BookingController {
 	 * This method directs to confirmation page and then the trip is added to users
 	 * bookings list
 	 */
+
 	@GetMapping("/booktrip/{id}")
 	public String bookThisTrip(@PathVariable(name = "id") Long id, Model model) {
-		model.addAttribute("trip", tripRepo.findById(id));
 		model.addAttribute("booking", new Booking());
-		// model.addAttribute("booking", new Booking());
+		model.addAttribute("trip", tripRepo.findById(id).get()); // returns trip by id to web page
 		return "booktrip";
 	}
 
-	/*
-	 * @PostMapping("/setdate") public String setDateForBooking(Model
-	 * model, @ModelAttribute("booking") Booking booking) {
-	 * model.addAttribute("booking", booking); return "redirect:/timetable"; }
-	 */
-
 	// adds booked trip and current user to bookings
 	@PostMapping("/book")
-	public String saveBooking(Trip trip, @ModelAttribute("booking") Booking booking, Principal principal) {
+	public String saveBooking(Booking booking, Trip trip, Principal principal) {
 		booking.setTrip(trip); // this sets the selected trip to new booking
 		booking.setUser(userRepo.findByUsername(principal.getName())); // this sets the current user to new booking
 		bookingRepo.save(booking);
