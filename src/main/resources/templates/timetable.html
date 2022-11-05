@@ -21,11 +21,11 @@
 			<div class="col"> <h5 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h5></div>
 			<div class="col" style="text-align: right" th:switch="${#authentication}? ${#authorization.expression('isAuthenticated()')} : ${false}">
 				<form th:case="${true}"th:action="@{/logout}" method="post">
-					<input type="submit" value="Log Out" class="btn btn-sm btn-danger"/>
+					<input type="submit" value="Log Out" class="btn btn-outline-danger"/>
 				</form>
 				<form th:case="${false}" th:action="@{/login}" method="get">
-					<input type="submit" value="Log in" class="btn btn-sm btn-success"/>
-					<span><a class="btn btn-sm btn-success" th:href="@{/signup}">Sign up</a></span>
+					<input type="submit" value="Log in" class="btn btn-outline-success"/>
+					<span><a class="btn btn-outline-success" th:href="@{/signup}">Sign up</a></span>
 				</form>	
 			</div>
 		</div>
@@ -41,7 +41,15 @@
 		</div>
 		
 		<div class="row" style="margin-left: 10px">
-			<input placeholder="Search..."/>
+			<div class="col-md-3">
+				<form class="col" action="#" th:action="@{/timetable}" method="get">
+					<input type="text" class="form-control" placeholder="Search trip here..." name="destination" required/>
+					<input type="submit" class="btn btn-sm btn-outline-info" value="Search"/>
+				</form>
+			</div>
+			<div class="col align-self-end" >
+				<a class="btn btn-sm btn-outline-info" th:href="@{/timetable}">Show all trips</a>
+			</div>
 		</div>
 		<table class="table">
 			<thead class="thead-light">
@@ -57,7 +65,19 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="trip : ${trips}">
+				<!-- if searched destination, show only those trips with searched destination -->
+				<tr th:each="trip : ${trips}" th:if="${destination} == ${trip.destination}">
+					<td th:text="${trip.departure}"></td>
+					<td th:text="${trip.destination}"></td>
+					<td th:text="${trip.departureTime}"></td>
+					<td th:text="${trip.arrivalTime}"></td>
+					<td th:text="${trip.trainType.name}"></td>
+					<td><a class="btn btn-danger" sec:authorize="hasAuthority('ADMIN')" th:href="@{/deletetrip/{id}(id=${trip.tripId})}">Delete</a></td>
+					<td><a class="btn btn-success" sec:authorize="hasAuthority('ADMIN')" th:href="@{/edittrip/{id}(id=${trip.tripId})}">Edit</a></td>
+					<td><a class="btn btn-primary" th:href="@{/booktrip/{id}(id=${trip.tripId})}">Book this trip</a></td>
+				</tr>
+				<!-- otherwise if no search show all trips. Default value for request parameter is "" -->
+				<tr th:each="trip : ${trips}" th:if="${destination} == ''">
 					<td th:text="${trip.departure}"></td>
 					<td th:text="${trip.destination}"></td>
 					<td th:text="${trip.departureTime}"></td>

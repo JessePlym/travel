@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import hh.palvelinohjelmointi.travel.domain.Booking;
 import hh.palvelinohjelmointi.travel.domain.TrainTypeRepository;
@@ -22,11 +23,17 @@ public class TripController {
 	@Autowired
 	public TrainTypeRepository typeRepo;
 
-	// lists all trips
+	// lists all trips and if the user has made a search, then lists trips by the
+	// search
 	@GetMapping("/timetable")
-	public String showAlltrips(Model model) {
+	public String showAlltrips(Model model,
+			@RequestParam(name = "destination", defaultValue = "") String tripDestination) {
 		model.addAttribute("trips", tripRepo.findAll());
 		model.addAttribute("booking", new Booking()); // for date
+		model.addAttribute("destination", tripDestination); // this is for
+		// model.addAttribute("destination", "Tampere");
+		System.out.println(tripDestination);
+		// conditional listing
 		return "timetable";
 	}
 

@@ -56,9 +56,11 @@ public class TravelApplication {
 			// creating test trips with traintypes and adding to repos
 			Trip trip1 = new Trip("Helsinki", "Tampere", "12:00", "13:30", type1);
 			Trip trip2 = new Trip("Helsinki", "Turku", "12:05", "13:40", type2);
+			Trip trip3 = new Trip("Helsinki", "Tampere", "13:00", "14:30", type1);
 
 			tripRepo.save(trip1);
 			tripRepo.save(trip2);
+			tripRepo.save(trip3);
 
 			// logging trips to console
 			for (Trip trip : tripRepo.findAll()) {
