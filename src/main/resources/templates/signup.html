@@ -5,28 +5,22 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link type="text/css" rel="stylesheet" href="css/css/bootstrap.min.css" th:href="@{css/css/bootstrap.min.css}"/>
-	<style>
-		.container {
-			text-align: center;
-			justify-content: center;
-			margin: auto;
-		}
-	</style>
 </head>
 <body>
 <div class="container">
-	<h1>Sign-up</h1>
-     <div>
+	<h1 class="row justify-content-md-center">Sign Up</h1>
+    <div class="form-row justify-content-md-center">
+     	
 		<form th:action="@{/saveuser}" action="#" th:object="${signupform}" method="post">
-			<div>
+			<div class="form-group">
 				<label> Email :<input type="email" th:field="*{username}" class="form-control"/></label>
 				<p th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Email Error</p>	
 			</div>
-			<div>
+			<div class="form-group">
 				<label> Password :<input type="password" th:field="*{password}" class="form-control"/></label>
 				<p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</p>	
 			</div>
-			<div>
+			<div class="form-group">
 				<label> Re-type Password: <input type="password" th:field="*{passwordCheck}" class="form-control"/></label>
 				<p th:if="${#fields.hasErrors('passwordCheck')}" th:errors="*{passwordCheck}">Password Match Error</p>	
 			</div>
