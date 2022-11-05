@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import hh.palvelinohjelmointi.travel.domain.Booking;
 import hh.palvelinohjelmointi.travel.domain.TrainTypeRepository;
 import hh.palvelinohjelmointi.travel.domain.Trip;
 import hh.palvelinohjelmointi.travel.domain.TripRepository;
@@ -23,17 +22,17 @@ public class TripController {
 	@Autowired
 	public TrainTypeRepository typeRepo;
 
-	// lists all trips and if the user has made a search, then lists trips by the
-	// search
+	/*
+	 * lists all trips and if the user has made a search, then lists trips by the
+	 * search. Method uses request parameter and its value is from the search input.
+	 * Default value for search is empty string and then all trips are shown by
+	 * default
+	 */
 	@GetMapping("/timetable")
 	public String showAlltrips(Model model,
 			@RequestParam(name = "destination", defaultValue = "") String tripDestination) {
 		model.addAttribute("trips", tripRepo.findAll());
-		model.addAttribute("booking", new Booking()); // for date
-		model.addAttribute("destination", tripDestination); // this is for
-		// model.addAttribute("destination", "Tampere");
-		System.out.println(tripDestination);
-		// conditional listing
+		model.addAttribute("destination", tripDestination); // this is for condition
 		return "timetable";
 	}
 
@@ -42,7 +41,7 @@ public class TripController {
 	@PreAuthorize("hasAuthority('ADMIN')")
 	public String addNewTrip(Model model) {
 		model.addAttribute("trip", new Trip());
-		model.addAttribute("traintypes", typeRepo.findAll()); // train types will in dropdown list
+		model.addAttribute("traintypes", typeRepo.findAll()); // train types will be in dropdown list
 		return "addtrip";
 	}
 
