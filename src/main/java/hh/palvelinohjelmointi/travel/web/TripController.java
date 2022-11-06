@@ -29,10 +29,19 @@ public class TripController {
 	 * default
 	 */
 	@GetMapping("/timetable")
-	public String showAlltrips(Model model,
-			@RequestParam(name = "destination", defaultValue = "") String tripDestination) {
+	public String showAlltrips(Model model, @RequestParam(name = "destination", defaultValue = "") String searchInput) {
+		// first checks if searchInput is not empty string
+		if (!(searchInput.equalsIgnoreCase(""))) {
+			// returns message to user if no results found
+			if (tripRepo.findByDestination(searchInput).isEmpty()) {
+				model.addAttribute("notFoundMsg", "No results found");
+			}
+			// return trips by destination using searchInput
+			model.addAttribute("trips", tripRepo.findByDestination(searchInput));
+			return "timetable";
+		}
+		// otherwise returns all trips
 		model.addAttribute("trips", tripRepo.findAll());
-		model.addAttribute("destination", tripDestination); // this is for condition
 		return "timetable";
 	}
 
