@@ -55,7 +55,12 @@ public class TravelApplication {
 			Trip trip1 = new Trip("Helsinki", "Tampere", "12:00", "13:30", type1);
 			Trip trip2 = new Trip("Helsinki", "Turku", "12:05", "13:40", type2);
 			Trip trip3 = new Trip("Helsinki", "Tampere", "13:00", "14:30", type1);
-			tripRepo.saveAll(Arrays.asList(trip1, trip2, trip3));
+			Trip trip4 = new Trip("Helsinki", "Kuopio", "13:00", "17:30", type1);
+			Trip trip5 = new Trip("Helsinki", "Pori", "13:05", "16:00", type2);
+			Trip trip6 = new Trip("Helsinki", "Turku", "17:05", "18:40", type2);
+			Trip trip7 = new Trip("Helsinki", "Tampere", "13:05", "14:35", type2);
+			Trip trip8 = new Trip("Helsinki", "Tampere", "17:00", "18:30", type1);
+			tripRepo.saveAll(Arrays.asList(trip1, trip2, trip3, trip4, trip5, trip7, trip8, trip6));
 
 			// logging trips to console
 			for (Trip trip : tripRepo.findAll()) {
