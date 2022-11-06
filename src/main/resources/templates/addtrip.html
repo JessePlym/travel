@@ -16,7 +16,7 @@
 				<div><label>Departure time: </label><input class="form-control" type="text" th:field="*{departureTime}" required/></div>
 				<div><label>Arrival time: </label><input class="form-control" type="text" th:field="*{arrivalTime}" required/></div>
 				<div><label>Train type: </label>
-					<select th:field="*{trainType}">
+					<select class="form-control" th:field="*{trainType}">
 						<option th:each="type : ${traintypes}" th:value="${type.typeId}" th:text="${type.name}"></option>
 					</select>
 				</div>
