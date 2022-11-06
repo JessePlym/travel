@@ -11,6 +11,12 @@
 			justify-content: center;
 			margin: auto;
 		}
+		.form-control {
+			text-align: center;
+		}
+		label {
+			font-weight: bold;
+		}
 	</style>
 </head>
 <body>
@@ -19,14 +25,14 @@
 		<p>Do you want to book this trip?</p>
 		
 		<form action="#" th:action="@{/book}" method="post" th:object="${booking}">	
-			<div><label>Select date for your trip: </label><input placeholder="dd.mm.yyyy" type="date" th:field="*{date}" th:attr="min=${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}" required/></div>
+			<div><label>Select date for your trip: </label><input class="form-control" placeholder="dd.mm.yyyy" type="date" th:field="*{date}" th:attr="min=${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}" required/></div>
 			<div><input type="hidden" th:field="${trip.tripId}"/></div>
 			<div><label>From: </label><input class="form-control" type="text" th:field="${trip.departure}" readonly/></div>
 			<div><label>Destination: </label><input class="form-control" type="text" th:field="${trip.destination}" readonly/></div>
 			<div><label>Departure time: </label><input class="form-control" type="text" th:field="${trip.departureTime}" readonly/></div>
 			<div><label>Arrival time: </label><input class="form-control" type="text" th:field="${trip.arrivalTime}" readonly/></div>
 			<div><label>Train type: </label><input class="form-control" type="text" th:field="${trip.trainType.name}" readonly/></div>
-			
+			<br>
 			<input type="submit" class="btn btn-success" value="Pay here"/>
 		</form>
 		
