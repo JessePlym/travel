@@ -3,7 +3,6 @@ package hh.palvelinohjelmointi.travel.domain;
 import java.util.Date;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,7 +20,7 @@ public class Booking {
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	private Long bookingNumber;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JsonIgnoreProperties("bookings")
 	@JoinColumn(name = "tripId")
 	private Trip trip;

@@ -13,6 +13,7 @@ public class BookingRestController {
 	@Autowired
 	private BookingRepository repository;
 
+	// returns all bookings as JSON form
 	@RequestMapping("/bookings")
 	public Iterable<Booking> getBookings() {
 		return repository.findAll();
