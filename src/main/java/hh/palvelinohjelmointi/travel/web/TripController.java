@@ -28,7 +28,7 @@ public class TripController {
 	 * Default value for search is empty string and then all trips are shown by
 	 * default
 	 */
-	@GetMapping("/timetable")
+	@GetMapping({ "/timetable", "/" })
 	public String showAlltrips(Model model, @RequestParam(name = "destination", defaultValue = "") String searchInput) {
 		// first checks if searchInput is not empty string
 		if (!(searchInput.equalsIgnoreCase(""))) {
