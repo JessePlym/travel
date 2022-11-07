@@ -42,9 +42,9 @@ public class TravelApplication {
 			userRepo.saveAll(Arrays.asList(user1, user2, admin));
 
 			// logging users to console
-			for (User user : userRepo.findAll()) {
-				log.info(user.toString());
-			}
+//			for (User user : userRepo.findAll()) {
+//				log.info(user.toString());
+//			}
 
 			// creating few test traintypes
 			TrainType type1 = new TrainType("ExpressTrain");
@@ -63,18 +63,18 @@ public class TravelApplication {
 			tripRepo.saveAll(Arrays.asList(trip1, trip2, trip3, trip4, trip5, trip7, trip8, trip6));
 
 			// logging trips to console
-			for (Trip trip : tripRepo.findAll()) {
-				log.info(trip.toString());
-			}
+//			for (Trip trip : tripRepo.findAll()) {
+//				log.info(trip.toString());
+//			}
 
 			// creating test bookings that use previously made trips
 			Booking booking1 = new Booking(trip1, user1, new Date());
 			Booking booking2 = new Booking(trip2, user2, new Date());
 			bookingRepo.saveAll(Arrays.asList(booking1, booking2));
 
-			for (Booking booking : bookingRepo.findAll()) {
-				log.info(booking.toString());
-			}
+//			for (Booking booking : bookingRepo.findAll()) {
+//				log.info(booking.toString());
+//			}
 		};
 	}
 
