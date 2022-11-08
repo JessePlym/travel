@@ -29,6 +29,10 @@ public class UserController {
 
 	@PostMapping("/saveuser")
 	public String saveUser(@Valid @ModelAttribute("signupform") SignUpForm form, BindingResult bindingResult) {
+		if (form.getPassword().length() < 7) {
+			bindingResult.rejectValue("password", "err.password", "Password too short");
+			return "signup";
+		}
 		if (!bindingResult.hasErrors()) {
 			if (form.getPassword().equals(form.getPasswordCheck())) {
 				// encrypts password that users inputs
@@ -46,7 +50,6 @@ public class UserController {
 					bindingResult.rejectValue("username", "err.username", "Username alreade exists");
 					return "signup";
 				}
-				// TODO check other possible errors
 			} else {
 				bindingResult.rejectValue("passwordCheck", "err.passCheck", "Passwords does not match");
 				return "signup";
