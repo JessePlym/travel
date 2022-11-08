@@ -6,10 +6,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link type="text/css" rel="stylesheet" href="css/css/bootstrap.min.css" th:href="@{/css/css/bootstrap.min.css}"/>
 	<style>
-		.container {
-			text-align: center;
-			justify-content: center;
-			margin: auto;
+		body {
+  			padding-bottom: 40px;
 		}
 		.form-control {
 			text-align: center;
@@ -20,7 +18,7 @@
 	</style>
 </head>
 <body>
-	<div class="container">
+	<div class="container text-center">
 		<h1>Travel booking</h1>
 		<p>Do you want to book this trip?</p>
 		
@@ -33,7 +31,7 @@
 			<div><label>Arrival time: </label><input class="form-control" type="text" th:field="${trip.arrivalTime}" readonly/></div>
 			<div><label>Train type: </label><input class="form-control" type="text" th:field="${trip.trainType.name}" readonly/></div>
 			<br>
-			<input type="submit" class="btn btn-success" value="Pay here"/>
+			<input type="submit" class="btn btn-lg btn-success" value="Pay here"/>
 		</form>
 		
 			<a href="/timetable"> Back</a>

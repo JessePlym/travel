@@ -20,9 +20,9 @@
 			<input type="hidden" th:field="*{bookingNumber}"/>
 			<input type="hidden" th:field="*{trip}"/>
 			<input type="hidden" th:field="*{user}"/>
-			<div><input type="date" th:attr="min=${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}" th:field="*{date}"/></div>
-		
-			<div><input type="submit" class="btn btn-primary" value="Edit"/></div>
+			<div><input class="form-control" type="date" th:attr="min=${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}" th:field="*{date}"/></div>
+			<br>
+			<div><input type="submit" class="btn btn-lg btn-primary" value="Edit"/></div>
 		</form>
 	</div>
 </body>
