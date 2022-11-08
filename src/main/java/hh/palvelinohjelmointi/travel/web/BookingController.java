@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import hh.palvelinohjelmointi.travel.domain.Booking;
 import hh.palvelinohjelmointi.travel.domain.BookingRepository;
@@ -24,16 +25,16 @@ import hh.palvelinohjelmointi.travel.domain.UserRepository;
 public class BookingController {
 
 	@Autowired
-	public BookingRepository bookingRepo;
+	private BookingRepository bookingRepo;
 
 	@Autowired
-	public TripRepository tripRepo;
+	private TripRepository tripRepo;
 
 	@Autowired
-	public UserRepository userRepo;
+	private UserRepository userRepo;
 
 	@Autowired
-	public TrainTypeRepository typeRepo;
+	private TrainTypeRepository typeRepo;
 
 	// this method shows all bookings made by user
 	// only the owner can make changes
@@ -75,8 +76,9 @@ public class BookingController {
 	}
 
 	// this method deletes booking from repository
-	@GetMapping("/deletebooking/{id}")
-	public String deleteBooking(@PathVariable(name = "id") Long id) {
+	// gets request param from thymeleaf modal
+	@GetMapping("/deletebooking")
+	public String deleteBooking(@RequestParam(name = "bookingNumber") Long id) {
 		bookingRepo.deleteById(id);
 		return "redirect:/ownbookings";
 	}

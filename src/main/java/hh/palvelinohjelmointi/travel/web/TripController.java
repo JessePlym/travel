@@ -17,10 +17,10 @@ import hh.palvelinohjelmointi.travel.domain.TripRepository;
 public class TripController {
 
 	@Autowired
-	public TripRepository tripRepo;
+	private TripRepository tripRepo;
 
 	@Autowired
-	public TrainTypeRepository typeRepo;
+	private TrainTypeRepository typeRepo;
 
 	/*
 	 * lists all trips and if the user has made a search, then lists trips by the

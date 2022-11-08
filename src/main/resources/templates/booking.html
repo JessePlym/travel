@@ -4,7 +4,9 @@
 <title>Bookings</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<link rel="stylesheet" type="text/css" href="css/css/bootstrap.min.css" th:href="@{css/css/bootstrap.min.css}">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+	<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </head>
 <body>
 	<div class="container">
@@ -12,6 +14,27 @@
 		<div style="text-align: right; padding: 20px 0">
 			<a href="/timetable">Return</a>
 		</div>
+		<!-- modal for booking deleting -->
+  		<div class="modal fade" th:each="booking : ${bookings}" th:attr="id=${'editModal' + booking.bookingNumber}">
+    		<div class="modal-dialog">
+      			<div class="modal-content">
+      				<div class="modal-header">
+      					<h2>Cancel this booking?</h2>
+      					<button class="btn-close" data-bs-dismiss="modal"></button>
+      				</div>
+      				<div class="modal-body">
+      					<form action="#" th:action="@{/deletebooking}" th:object="${booking}" method="get">
+      						<input type="hidden" name="bookingNumber" th:value="${booking.bookingNumber}"/>
+      						<input type="text" th:value="'From  ' + ${booking.trip.departure}" readonly class="form-control form-control-plaintext"/>
+      						<input type="text" th:value="'To  ' + ${booking.trip.destination}" readonly class="form-control form-control-plaintext"/>
+      						<input type="text" th:value="${#dates.format(booking.date, 'dd.MM.yyyy')}" readonly class="form-control form-control-plaintext"/>
+      						<br>
+      						<button type="submit" class="btn btn-danger">Confirm</button>
+      					</form>
+      				</div> 
+      			</div>
+    		</div>
+  		</div>
 		<table class="table">
 			<tr>
 				<th>Booking number</th>
@@ -34,10 +57,13 @@
 				<td th:text="${booking.trip.departureTime}"></td>
 				<td th:text="${booking.trip.arrivalTime}"></td>
 				<td th:text="${booking.trip.trainType.name}"></td>
-				<td><a class="btn btn-danger" th:href="@{/deletebooking/{id}(id=${booking.bookingNumber})}" onClick="return confirm('Do you want to cancel your trip?')">Cancel trip</a></td>
-				<td><a class="btn btn-success" th:href="@{/editbooking/{id}(id=${booking.bookingNumber})}">Edit your trip</a></td>
+				<!-- button for toggling modals for deleting -->
+				<td><button class="btn btn-danger" data-bs-toggle="modal" th:attr="data-bs-target=${'#editModal'+booking.bookingNumber}" th:data-row="${booking}">Cancel trip</button></td>
+				<td><a class="btn btn-success" th:href="@{/editbooking/{id}(id=${booking.bookingNumber})}">Change date</a></td>
 			</tr>
 		</table>
+		
+		<!--   -->
 	</div>
 </body>
 </html>
