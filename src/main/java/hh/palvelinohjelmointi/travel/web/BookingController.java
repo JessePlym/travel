@@ -78,8 +78,12 @@ public class BookingController {
 	// this method deletes booking from repository
 	// gets request param from thymeleaf modal
 	@GetMapping("/deletebooking")
-	public String deleteBooking(@RequestParam(name = "bookingNumber") Long id) {
-		bookingRepo.deleteById(id);
+	public String deleteBooking(@RequestParam(name = "bookingNumber") Long id, Principal principal) {
+		// this checks that the logged user is same as booking owner. Prevents users to
+		// delete other bookings than own.
+		if (bookingRepo.findById(id).get().getUser().getUsername().equals(principal.getName())) {
+			bookingRepo.deleteById(id);
+		}
 		return "redirect:/ownbookings";
 	}
 
