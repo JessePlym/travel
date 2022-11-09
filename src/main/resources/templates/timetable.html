@@ -44,15 +44,13 @@
 		</div>
 		
 		<div class="row" style="margin-left: 10px">
-			<div class="col-md-3">
-				<form class="col" action="#" th:action="@{/timetable}" method="get">
+			<div class="col-3">
+				<form action="#" th:action="@{/timetable}" method="get">
 					<input type="text" class="form-control" placeholder="Search trip here..." name="destination" required/>
 					<p th:text="${notFoundMsg}">No results</p>
 					<input type="submit" class="btn btn-sm btn-outline-info" value="Search"/>
+					<a class="btn btn-sm btn-outline-info" th:href="@{/timetable}">Show all trips</a>
 				</form>
-			</div>
-			<div class="col align-self-end" >
-				<a class="btn btn-sm btn-outline-info" th:href="@{/timetable}">Show all trips</a>
 			</div>
 		</div>
 		<table class="table">

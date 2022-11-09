@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import hh.palvelinohjelmointi.travel.domain.Booking;
 import hh.palvelinohjelmointi.travel.domain.BookingRepository;
-import hh.palvelinohjelmointi.travel.domain.TrainTypeRepository;
 import hh.palvelinohjelmointi.travel.domain.Trip;
 import hh.palvelinohjelmointi.travel.domain.TripRepository;
 import hh.palvelinohjelmointi.travel.domain.User;
@@ -32,9 +31,6 @@ public class BookingController {
 
 	@Autowired
 	private UserRepository userRepo;
-
-	@Autowired
-	private TrainTypeRepository typeRepo;
 
 	// this method shows all bookings made by user
 	// only the owner can make changes
@@ -61,9 +57,15 @@ public class BookingController {
 
 	@GetMapping("/booktrip/{id}")
 	public String bookThisTrip(@PathVariable(name = "id") Long id, Model model) {
-		model.addAttribute("booking", new Booking());
-		model.addAttribute("trip", tripRepo.findById(id).get()); // returns trip by id to web page
-		return "booktrip";
+		try {
+			model.addAttribute("booking", new Booking());
+			model.addAttribute("trip", tripRepo.findById(id).get()); // returns trip object by id
+			return "booktrip";
+		} catch (Exception e) {
+			model.addAttribute("error", "error trying book trip");
+			e.printStackTrace();
+			return "error";
+		}
 	}
 
 	// adds booked trip and current user to bookings
