@@ -32,6 +32,7 @@ public class WebSecurityConfig {
 	public SecurityFilterChain configure(HttpSecurity http) throws Exception {
 		http
 		.authorizeRequests()
+			.antMatchers("/api").hasAuthority("ADMIN")
 			.antMatchers("/css/**").permitAll()
 			.antMatchers("/signup", "/saveuser", "/timetable", "/").permitAll()
 			.antMatchers("/h2-console/**").permitAll()
