@@ -97,9 +97,12 @@ public class BookingController {
 	}
 
 	@PostMapping("/edit")
-	public String saveEditedBooking(Booking booking) {
-		bookingRepo.save(booking);
+	public String saveEditedBooking(Booking booking, Principal principal) {
+		if (booking.getUser().getUsername().equals(principal.getName())) {
+			bookingRepo.save(booking);
+		}
 		return "redirect:/ownbookings";
+
 	}
 
 }

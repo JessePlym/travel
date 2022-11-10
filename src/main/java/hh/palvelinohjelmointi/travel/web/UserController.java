@@ -3,12 +3,14 @@ package hh.palvelinohjelmointi.travel.web;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import hh.palvelinohjelmointi.travel.domain.SignUpForm;
@@ -58,6 +60,16 @@ public class UserController {
 			return "signup";
 		}
 		return "redirect:/login";
+	}
+
+	// deletes user from user repository. if user role is admin delete won't work.
+	@GetMapping("/deleteuser/{id}")
+	@PreAuthorize("hasAuthority('ADMIN')")
+	public String deleteUser(@PathVariable(name = "id") Long id) {
+		if (!(userRepo.findById(id).get().getRole().equals("ADMIN"))) {
+			userRepo.deleteById(id);
+		}
+		return "redirect:/timetable";
 	}
 
 }
