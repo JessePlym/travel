@@ -9,8 +9,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 @RepositoryRestResource
 public interface BookingRepository extends CrudRepository<Booking, Long> {
 
-	// List<Booking> findByUser(User user);
-
 	List<Booking> findByUser(@Param("user") User user);
 
 	List<Booking> findByTrip(@Param("trip") Trip trip);

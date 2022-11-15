@@ -23,11 +23,10 @@ public class WebSecurityConfig {
 	@Bean
 	public SecurityFilterChain configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers("/api/**").hasAuthority("ADMIN").antMatchers("/css/**").permitAll()
-				.antMatchers("/signup", "/saveuser", "/timetable", "/").permitAll().antMatchers("/h2-console/**")
-				.permitAll().anyRequest().authenticated().and().csrf().ignoringAntMatchers("/h2-console/**").and()
-				.headers().frameOptions().sameOrigin().and().csrf().disable().cors().and().formLogin()
-				.defaultSuccessUrl("/timetable", true).permitAll().and().logout().logoutSuccessUrl("/timetable")
-				.permitAll().and().httpBasic();
+				.antMatchers("/signup", "/saveuser", "/timetable", "/").permitAll().anyRequest().authenticated().and()
+				.csrf().ignoringAntMatchers("/h2-console/**").and().headers().frameOptions().sameOrigin().and().csrf()
+				.disable().cors().and().formLogin().defaultSuccessUrl("/timetable", true).permitAll().and().logout()
+				.logoutSuccessUrl("/timetable").permitAll().and().httpBasic();
 		return http.build();
 	}
 
